@@ -1,0 +1,19 @@
+<body class ="myrem">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+<mat-toolbar class ="mat-elevation-z6" id = "mynav" >
+  <span>Inventory Management</span>
+  <span id="myspace"></span>
+  <button mat-icon-button ><mat-icon>search</mat-icon></button>
+  <mat-form-field>
+  <input matInput placeholder="" value ="" >
+  </mat-form-field>
+  <button mat-button>Home</button>
+  <mat-menu #SignIn ='matMenu' >
+    <button mat-menu-item>Settings</button>
+  <button mat-menu-item>Help</button>
+  </mat-menu>
+  <button mat-button>Info</button>
+  <button mat-button>Notifications</button>
+  <button mat-button  mat-icon-button [matMenuTriggerFor]="SignIn">Account</button>
+</mat-toolbar>
+</body>

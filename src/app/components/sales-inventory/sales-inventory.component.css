@@ -1,0 +1,20 @@
+.inputfdisp{
+    display: inline-block;
+     
+}
+
+.inputfdisp, mat-form-field{
+    margin-left: 1px;
+    margin-right: 1px;
+
+}
+
+.inputfdisplay, button{
+    margin-left: 4px; 
+    margin-right: 4px;
+}
+
+.prefixSpace{
+    margin-right: 3px;
+    text-align: left;
+}

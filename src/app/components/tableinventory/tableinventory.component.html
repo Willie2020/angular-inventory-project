@@ -1,0 +1,23 @@
+<div class=" mat-elevation-z2" >
+  <mat-table class ="mytable" #table [dataSource] = "dataSource">
+
+      <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.title}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
+        </ng-container>
+
+    <mat-header-row *matHeaderRowDef ="inventoryColumns"></mat-header-row>
+    <mat-row *matRowDef = "let myrow; columns: inventoryColumns;"></mat-row>
+  </mat-table>
+
+</div>

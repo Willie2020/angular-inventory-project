@@ -1,0 +1,58 @@
+<body class="mainb">
+  <app-componentname id="fixednav"></app-componentname>
+  <header class="myhead">
+    <h1 class="secondh">Inventory Management</h1>
+  </header>
+
+  <mat-grid-list cols="7" rowHeight="120px" >
+    <mat-grid-tile [colspan]="1" [rowspan]="7">
+      <mat-card class="mat-elevation-z2 sidecard">
+        <mat-card-header>
+          <mat-card-title>
+            Inventory Panel
+          </mat-card-title>
+        </mat-card-header>
+        <img class="imgformat" src="https://firebasestorage.googleapis.com/v0/b/sfada-55ef2.appspot.com/o/room.png?alt=media&token=154d28f4-2455-4223-bdc5-c1095e7919c5" />
+        <mat-card-content>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <mat-nav-list>
+            <mat-list-item class="itemlist" routerLink ="/Salestable"> Sales 
+              <span></span>
+              <mat-icon>create</mat-icon>
+            </mat-list-item>
+            <mat-list-item class="itemlist" routerLink ="/tableinvent"> Items
+              <span></span>
+              <mat-icon>create</mat-icon>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="itemlist" routerLink ="/products" > Products 
+              <span></span>
+              <mat-icon>create</mat-icon>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item class="itemlist"  > Revenue
+              <span></span>
+              <mat-icon>create</mat-icon>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <!-- <button mat-raised-button (click)="openSnackBar()">Show snack-bar</button> -->
+          </mat-nav-list>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="6" [rowspan]="7">
+      <div class="tablesize">
+        <!-- *ngIf ="show" <span class ="spanh"></span>  -->
+        <!-- <a routerLink="/tableinvent"> AAlo</a> --> 
+        <router-outlet></router-outlet> 
+        <!-- <app-tableinventory></app-tableinventory> -->
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <!-- <app-tableinventory ></app-tableinventory> -->
+  <!-- <mat-grid-tile [colspan] = "6" [rowspan] ="7">3</mat-grid-tile> -->
+  
+
+</body>

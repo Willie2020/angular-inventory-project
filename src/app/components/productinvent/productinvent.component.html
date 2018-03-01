@@ -1,0 +1,54 @@
+
+<div>
+  <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="prod.Name" >
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Product Price" [(ngModel)]="prod.ProductPrice" >
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Quantity Available" [(ngModel)]="prod.QuantityAv" >
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Quantity Purchased" [(ngModel)]="prod.QuantityPch" >
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Quantity Sold" [(ngModel)]="prod.QuantitySld" >
+  </mat-form-field>
+  <button mat-raised-button color ="accent" (click)="addProduct()"> Add product </button>
+</div>
+
+<!-- Sales Table-->
+<div class="mat-elevation-z2">
+  <mat-table class="mytable2" #table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{product.Name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Product" >
+      <mat-header-cell *matHeaderCellDef> Product Price </mat-header-cell>
+      <mat-cell *matCellDef="let product"> ${{product.ProductPrice}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Quantity Available">
+      <mat-header-cell *matHeaderCellDef> Quantity Available </mat-header-cell>
+      <mat-cell *matCellDef="let product">{{product.QuantityAv}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Quantity Purchased">
+      <mat-header-cell *matHeaderCellDef> Quantity Purchased </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{product.QuantityPch}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Quantity Sold">
+      <mat-header-cell *matHeaderCellDef> Quantity Sold</mat-header-cell>
+      <mat-cell *matCellDef="let product">{{product.QuantitySld}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="ProductColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ProductColumns;"></mat-row>
+  </mat-table>
+</div>
+<!-- 'Name','Product Per Unit ','Quantity Available', 'Quantity Purchased', Quantity Sold  GH&#8373-->

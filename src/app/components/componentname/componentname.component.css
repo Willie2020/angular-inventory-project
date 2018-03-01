@@ -1,0 +1,31 @@
+#myspace {
+  flex: 11 auto;
+}
+
+.myrem {
+  margin: 0px;
+  padding: 0px;
+  background-color: #5d98c680;
+}
+
+#mynav{
+  color: rgb(255, 255, 255);
+  background-color: #5d98c680;
+  
+}
+
+.ko{
+  color: #80FFFFFF;
+}
+
+.inputfd{
+  display: inline-block;
+  position: relative;
+}
+
+/* Top background color
+background-color: #5d99c6;
+
+down background color
+background-color: #5d99c6;
+*/

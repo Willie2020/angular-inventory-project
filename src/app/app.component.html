@@ -1,3 +1,9 @@
-<ngx-loading-bar></ngx-loading-bar>
-<app-firstpg></app-firstpg>
- 
+<div class="app-container">
+  <mat-toolbar color="primary">
+    <span>{{title}}</span>
+  </mat-toolbar>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

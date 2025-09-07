@@ -2,7 +2,8 @@ import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { SalesInventService } from '../../services/sales-invent.service';
 import { Sales } from '../../models/sales';
 import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -88,8 +89,6 @@ export class SalesInventoryComponent implements OnInit, AfterViewInit {
       SalesStatus: ''
     };
   }
-}
-
 }
 
 export class SalesSource extends DataSource<Sales> {

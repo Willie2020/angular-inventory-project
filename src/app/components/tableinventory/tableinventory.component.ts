@@ -62,8 +62,6 @@ export class TableinventoryComponent implements OnInit, AfterViewInit {
   }
 }
 
-}
-
 export class InventorySource extends DataSource<Item> {
   constructor(private itemService: ItemService) {
     super();

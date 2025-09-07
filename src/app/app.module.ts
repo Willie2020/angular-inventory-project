@@ -12,7 +12,7 @@ import { SalesInventoryComponent } from './components/sales-inventory/sales-inve
 import { MyrouteModule} from './myroute/myroute.module';
 import { ProductsService } from './services/products.service';
 import { ProductinventComponent } from './components/productinvent/productinvent.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
@@ -29,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MyrouteModule
   ],

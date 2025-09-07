@@ -1,54 +1,86 @@
 
-<div>
-  <mat-form-field>
-      <input matInput placeholder="Name" [(ngModel)]="prod.Name" >
-  </mat-form-field>
-  <mat-form-field>
-      <input matInput placeholder="Product Price" [(ngModel)]="prod.ProductPrice" >
-  </mat-form-field>
-  <mat-form-field>
-      <input matInput placeholder="Quantity Available" [(ngModel)]="prod.QuantityAv" >
-  </mat-form-field>
-  <mat-form-field>
-      <input matInput placeholder="Quantity Purchased" [(ngModel)]="prod.QuantityPch" >
-  </mat-form-field>
-  <mat-form-field>
-      <input matInput placeholder="Quantity Sold" [(ngModel)]="prod.QuantitySld" >
-  </mat-form-field>
-  <button mat-raised-button color ="accent" (click)="addProduct()"> Add product </button>
+<div class="product-inventory-container">
+  <h2>Product Inventory Management</h2>
+  
+  <!-- Add Product Form -->
+  <mat-card class="add-product-card">
+    <mat-card-header>
+      <mat-card-title>Add New Product</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Product Name</mat-label>
+          <input matInput placeholder="Enter product name" [(ngModel)]="prod.Name">
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Product Price</mat-label>
+          <input matInput type="number" placeholder="0.00" [(ngModel)]="prod.ProductPrice">
+        </mat-form-field>
+      </div>
+      
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Quantity Available</mat-label>
+          <input matInput type="number" placeholder="0" [(ngModel)]="prod.QuantityAv">
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Quantity Purchased</mat-label>
+          <input matInput type="number" placeholder="0" [(ngModel)]="prod.QuantityPch">
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Quantity Sold</mat-label>
+          <input matInput type="number" placeholder="0" [(ngModel)]="prod.QuantitySld">
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="addProduct()">Add Product</button>
+      <button mat-button (click)="resetForm()">Reset</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Products Table -->
+  <mat-card class="products-table-card">
+    <mat-card-header>
+      <mat-card-title>Products List</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="mat-elevation-z2">
+        <mat-table [dataSource]="dataSource" class="products-table">
+
+          <ng-container matColumnDef="Name">
+            <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{product.Name}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="ProductPrice">
+            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+            <mat-cell *matCellDef="let product"> ${{product.ProductPrice | number:'1.2-2'}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="QuantityAv">
+            <mat-header-cell *matHeaderCellDef> Available </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{product.QuantityAv}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="QuantityPch">
+            <mat-header-cell *matHeaderCellDef> Purchased </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{product.QuantityPch}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="QuantitySld">
+            <mat-header-cell *matHeaderCellDef> Sold </mat-header-cell>
+            <mat-cell *matCellDef="let product"> {{product.QuantitySld}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="ProductColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ProductColumns;"></mat-row>
+        </mat-table>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
-
-<!-- Sales Table-->
-<div class="mat-elevation-z2">
-  <mat-table class="mytable2" #table [dataSource]="dataSource">
-
-    <ng-container matColumnDef="Name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
-      <mat-cell *matCellDef="let product"> {{product.Name}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Product" >
-      <mat-header-cell *matHeaderCellDef> Product Price </mat-header-cell>
-      <mat-cell *matCellDef="let product"> ${{product.ProductPrice}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Quantity Available">
-      <mat-header-cell *matHeaderCellDef> Quantity Available </mat-header-cell>
-      <mat-cell *matCellDef="let product">{{product.QuantityAv}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Quantity Purchased">
-      <mat-header-cell *matHeaderCellDef> Quantity Purchased </mat-header-cell>
-      <mat-cell *matCellDef="let product"> {{product.QuantityPch}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Quantity Sold">
-      <mat-header-cell *matHeaderCellDef> Quantity Sold</mat-header-cell>
-      <mat-cell *matCellDef="let product">{{product.QuantitySld}} </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="ProductColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ProductColumns;"></mat-row>
-  </mat-table>
-</div>
-<!-- 'Name','Product Per Unit ','Quantity Available', 'Quantity Purchased', Quantity Sold  GH&#8373-->

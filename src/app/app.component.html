@@ -1,3 +1,16 @@
-<ngx-loading-bar></ngx-loading-bar>
-<app-firstpg></app-firstpg>
+<div class="app-container">
+  <mat-toolbar color="primary">
+    <span>{{title}}</span>
+    <span class="spacer"></span>
+    <nav>
+      <a mat-button routerLink="/products" routerLinkActive="active">Products</a>
+      <a mat-button routerLink="/inventory" routerLinkActive="active">Inventory</a>
+      <a mat-button routerLink="/sales" routerLinkActive="active">Sales</a>
+    </nav>
+  </mat-toolbar>
+  
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
  

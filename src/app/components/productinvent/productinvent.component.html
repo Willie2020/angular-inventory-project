@@ -8,34 +8,36 @@
       <mat-card-title>Add New Product</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div class="form-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Product Name</mat-label>
-          <input matInput placeholder="Enter product name" [(ngModel)]="prod.Name">
-        </mat-form-field>
+      <form [formGroup]="productForm">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Product Name</mat-label>
+            <input matInput placeholder="Enter product name" formControlName="Name">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Product Price</mat-label>
+            <input matInput type="number" placeholder="0.00" formControlName="ProductPrice">
+          </mat-form-field>
+        </div>
         
-        <mat-form-field appearance="outline">
-          <mat-label>Product Price</mat-label>
-          <input matInput type="number" placeholder="0.00" [(ngModel)]="prod.ProductPrice">
-        </mat-form-field>
-      </div>
-      
-      <div class="form-row">
-        <mat-form-field appearance="outline">
-          <mat-label>Quantity Available</mat-label>
-          <input matInput type="number" placeholder="0" [(ngModel)]="prod.QuantityAv">
-        </mat-form-field>
-        
-        <mat-form-field appearance="outline">
-          <mat-label>Quantity Purchased</mat-label>
-          <input matInput type="number" placeholder="0" [(ngModel)]="prod.QuantityPch">
-        </mat-form-field>
-        
-        <mat-form-field appearance="outline">
-          <mat-label>Quantity Sold</mat-label>
-          <input matInput type="number" placeholder="0" [(ngModel)]="prod.QuantitySld">
-        </mat-form-field>
-      </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Quantity Available</mat-label>
+            <input matInput type="number" placeholder="0" formControlName="QuantityAv">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Quantity Purchased</mat-label>
+            <input matInput type="number" placeholder="0" formControlName="QuantityPch">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Quantity Sold</mat-label>
+            <input matInput type="number" placeholder="0" formControlName="QuantitySld">
+          </mat-form-field>
+        </div>
+      </form>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="addProduct()">Add Product</button>

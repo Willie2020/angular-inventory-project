@@ -17,24 +17,18 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ComponentnameComponent,
-    FirstpgComponent,
-    TableinventoryComponent,
-    SalesInventoryComponent,
-    ProductinventComponent
+   
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MyrouteModule
-  ],
-  providers: [ItemService, SalesInventService, ProductsService],
-  bootstrap: [AppComponent]
+imports: [
+  BrowserModule,
+  BrowserAnimationsModule,
+  MaterialModule,
+  FormsModule,
+  ReactiveFormsModule,
+  HttpClientModule,
+  MyrouteModule
+],
+providers: [ItemService, SalesInventService, ProductsService]
 })
 
 export class AppModule { }

@@ -3,14 +3,22 @@ import { ItemService } from '../../services/item.service';
 import { Item } from '../../models/Items';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-tableinventory',
   templateUrl: './tableinventory.component.html',
-  styleUrls: ['./tableinventory.component.css']
+  styleUrls: ['./tableinventory.component.css'],
+  imports: [CommonModule, FormsModule, MatTableModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule]
 })
 export class TableinventoryComponent implements OnInit, AfterViewInit {
-  inventoryColumns = ['id', 'title', 'description'];
+  inventoryColumns = ['id', 'title', 'description', 'actions'];
   item: Item[] = [];
   items$: Observable<Item[]>;
   dataSource = new InventorySource(this.itemService);

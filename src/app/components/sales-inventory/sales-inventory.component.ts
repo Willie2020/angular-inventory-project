@@ -2,14 +2,20 @@ import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { SalesInventService } from '../../services/sales-invent.service';
 import { Sales } from '../../models/sales';
 import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-sales-inventory',
   templateUrl: './sales-inventory.component.html',
-  styleUrls: ['./sales-inventory.component.css']
+  styleUrls: ['./sales-inventory.component.css'],
+  imports: [CommonModule, FormsModule, MatTableModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatPaginatorModule]
 })
 export class SalesInventoryComponent implements OnInit, AfterViewInit {
   SalesColumns = ['Date', 'ReferenceNo', 'Customer', 'Payment', 'Balance', 'SalesStatus', 'Actions'];

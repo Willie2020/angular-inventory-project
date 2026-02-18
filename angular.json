@@ -19,10 +19,20 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico"
+              "src/favicon.ico",
+              {
+                "glob": "material-symbols-outlined.woff2",
+                "input": "./node_modules/material-symbols/",
+                "output": "./assets/fonts/"
+              }
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/@fontsource/roboto/700.css",
+              "./node_modules/@fontsource/roboto/500.css",
+              "./node_modules/@fontsource/roboto/400.css",
+              "./node_modules/@fontsource/roboto/300.css",
+              "./node_modules/material-symbols/outlined.css",
+              "./node_modules/@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -89,7 +99,8 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/material-symbols/outlined.css",
+              "./node_modules/@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
             "scripts": []

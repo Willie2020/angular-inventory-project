@@ -1,88 +1,136 @@
 
-<div class="product-inventory-container">
-  <h2>Product Inventory Management</h2>
-  
+<div class="page-container">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <mat-icon>category</mat-icon>
+    <h2>Product Inventory</h2>
+  </div>
+
+  <!-- Summary Stats -->
+  <div class="stats-row">
+    <mat-card class="stat-card" appearance="outlined">
+      <mat-card-content>
+        <mat-icon class="stat-icon">inventory_2</mat-icon>
+        <div class="stat-value">{{totalProducts}}</div>
+        <div class="stat-label">Products</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" appearance="outlined">
+      <mat-card-content>
+        <mat-icon class="stat-icon">storefront</mat-icon>
+        <div class="stat-value">{{totalAvailable}}</div>
+        <div class="stat-label">Total in Stock</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="stat-card" appearance="outlined">
+      <mat-card-content>
+        <mat-icon class="stat-icon">payments</mat-icon>
+        <div class="stat-value">${{totalValue | number:'1.0-0'}}</div>
+        <div class="stat-label">Inventory Value</div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
   <!-- Add Product Form -->
-  <mat-card class="add-product-card">
+  <mat-card class="form-section-card" appearance="outlined">
     <mat-card-header>
+      <mat-icon mat-card-avatar class="form-icon">add_box</mat-icon>
       <mat-card-title>Add New Product</mat-card-title>
+      <mat-card-subtitle>Enter product details below</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content style="padding-top: 20px;">
       <form [formGroup]="productForm">
-        <div class="form-row">
+        <div class="form-grid-2">
           <mat-form-field appearance="outline">
             <mat-label>Product Name</mat-label>
-            <input matInput placeholder="Enter product name" formControlName="Name">
+            <mat-icon matPrefix>label</mat-icon>
+            <input matInput placeholder="e.g. Widget A" formControlName="Name">
           </mat-form-field>
-          
           <mat-form-field appearance="outline">
             <mat-label>Product Price</mat-label>
+            <mat-icon matPrefix>attach_money</mat-icon>
             <input matInput type="number" placeholder="0.00" formControlName="ProductPrice">
           </mat-form-field>
         </div>
-        
-        <div class="form-row">
+        <div class="form-grid-3">
           <mat-form-field appearance="outline">
             <mat-label>Quantity Available</mat-label>
+            <mat-icon matPrefix>inventory</mat-icon>
             <input matInput type="number" placeholder="0" formControlName="QuantityAv">
           </mat-form-field>
-          
           <mat-form-field appearance="outline">
             <mat-label>Quantity Purchased</mat-label>
+            <mat-icon matPrefix>shopping_cart</mat-icon>
             <input matInput type="number" placeholder="0" formControlName="QuantityPch">
           </mat-form-field>
-          
           <mat-form-field appearance="outline">
             <mat-label>Quantity Sold</mat-label>
+            <mat-icon matPrefix>sell</mat-icon>
             <input matInput type="number" placeholder="0" formControlName="QuantitySld">
           </mat-form-field>
         </div>
       </form>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="addProduct()">Add Product</button>
-      <button mat-button (click)="resetForm()">Reset</button>
-    </mat-card-actions>
+    <div class="card-actions">
+      <button mat-flat-button color="primary" (click)="addProduct()">
+        <mat-icon>add</mat-icon> Add Product
+      </button>
+      <button mat-stroked-button (click)="resetForm()">
+        <mat-icon>refresh</mat-icon> Reset
+      </button>
+    </div>
   </mat-card>
 
   <!-- Products Table -->
-  <mat-card class="products-table-card">
+  <mat-card appearance="outlined">
     <mat-card-header>
+      <mat-icon mat-card-avatar class="form-icon">table_chart</mat-icon>
       <mat-card-title>Products List</mat-card-title>
+      <mat-card-subtitle>{{totalProducts}} products in catalog</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-      <div class="mat-elevation-z2">
-        <mat-table [dataSource]="dataSource" class="products-table">
+    <mat-divider></mat-divider>
+    <mat-card-content style="padding: 0;">
+      <mat-table [dataSource]="dataSource" class="full-width-table">
 
-          <ng-container matColumnDef="Name">
-            <mat-header-cell *matHeaderCellDef> Product Name </mat-header-cell>
-            <mat-cell *matCellDef="let product"> {{product.Name}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="Name">
+          <mat-header-cell *matHeaderCellDef>Product Name</mat-header-cell>
+          <mat-cell *matCellDef="let product">
+            <span class="product-name">{{product.Name}}</span>
+          </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="ProductPrice">
-            <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-            <mat-cell *matCellDef="let product"> ${{product.ProductPrice | number:'1.2-2'}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="ProductPrice">
+          <mat-header-cell *matHeaderCellDef>Price</mat-header-cell>
+          <mat-cell *matCellDef="let product">
+            <span class="price-badge">${{product.ProductPrice | number:'1.2-2'}}</span>
+          </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="QuantityAv">
-            <mat-header-cell *matHeaderCellDef> Available </mat-header-cell>
-            <mat-cell *matCellDef="let product"> {{product.QuantityAv}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="QuantityAv">
+          <mat-header-cell *matHeaderCellDef>Available</mat-header-cell>
+          <mat-cell *matCellDef="let product">
+            <span class="qty-badge available">{{product.QuantityAv}}</span>
+          </mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="QuantityPch">
-            <mat-header-cell *matHeaderCellDef> Purchased </mat-header-cell>
-            <mat-cell *matCellDef="let product"> {{product.QuantityPch}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="QuantityPch">
+          <mat-header-cell *matHeaderCellDef>Purchased</mat-header-cell>
+          <mat-cell *matCellDef="let product">{{product.QuantityPch}}</mat-cell>
+        </ng-container>
 
-          <ng-container matColumnDef="QuantitySld">
-            <mat-header-cell *matHeaderCellDef> Sold </mat-header-cell>
-            <mat-cell *matCellDef="let product"> {{product.QuantitySld}} </mat-cell>
-          </ng-container>
+        <ng-container matColumnDef="QuantitySld">
+          <mat-header-cell *matHeaderCellDef>Sold</mat-header-cell>
+          <mat-cell *matCellDef="let product">{{product.QuantitySld}}</mat-cell>
+        </ng-container>
 
-          <mat-header-row *matHeaderRowDef="ProductColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: ProductColumns;"></mat-row>
-        </mat-table>
-      </div>
+        <mat-header-row *matHeaderRowDef="ProductColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ProductColumns;"></mat-row>
+      </mat-table>
     </mat-card-content>
   </mat-card>
+
 </div>

@@ -1,20 +1,40 @@
-.inputfdisp{
-    display: inline-block;
-     
+.full-width-table {
+  width: 100%;
 }
 
-.inputfdisp, mat-form-field{
-    margin-left: 1px;
-    margin-right: 1px;
-
+.form-icon {
+  color: #0054a6;
 }
 
-.inputfdisplay, button{
-    margin-left: 4px; 
-    margin-right: 4px;
+.ref-badge {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.8rem;
+  background: #e8eaf6;
+  color: #3949ab;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
 }
 
-.prefixSpace{
-    margin-right: 3px;
-    text-align: left;
+.customer-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.customer-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: #888;
+}
+
+.amount-positive {
+  font-weight: 600;
+  color: #1a7340;
+}
+
+.amount-negative {
+  font-weight: 600;
+  color: #c5221f;
 }

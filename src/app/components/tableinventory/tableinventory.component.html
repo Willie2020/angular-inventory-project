@@ -1,23 +1,87 @@
-<div class=" mat-elevation-z2" >
-  <mat-table class ="mytable" #table [dataSource] = "dataSource">
+<div class="page-container">
 
-      <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
+  <!-- Page Header -->
+  <div class="page-header">
+    <mat-icon>inventory</mat-icon>
+    <h2>Inventory Items</h2>
+  </div>
+
+  <!-- Add Item Form -->
+  <mat-card class="form-section-card" appearance="outlined">
+    <mat-card-header>
+      <mat-icon mat-card-avatar class="form-icon">add_box</mat-icon>
+      <mat-card-title>Add New Item</mat-card-title>
+      <mat-card-subtitle>Enter item title and description</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content style="padding-top: 20px;">
+      <div class="form-grid-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <mat-icon matPrefix>label</mat-icon>
+          <input matInput placeholder="Item title" [(ngModel)]="newItem.title">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <mat-icon matPrefix>notes</mat-icon>
+          <input matInput placeholder="Brief description" [(ngModel)]="newItem.description">
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <div class="card-actions">
+      <button mat-flat-button color="primary" (click)="addItem()">
+        <mat-icon>add</mat-icon> Add Item
+      </button>
+      <button mat-stroked-button (click)="resetForm()">
+        <mat-icon>refresh</mat-icon> Reset
+      </button>
+    </div>
+  </mat-card>
+
+  <!-- Items Table -->
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-icon mat-card-avatar class="form-icon">table_chart</mat-icon>
+      <mat-card-title>Items List</mat-card-title>
+      <mat-card-subtitle>{{item.length}} items</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content style="padding: 0;">
+      <mat-table class="full-width-table" #table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <span class="id-badge">{{item.id}}</span>
+          </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="title">
-          <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.title}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <span class="item-title">{{item.title}}</span>
+          </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="description">
-          <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+          <mat-cell *matCellDef="let item" class="description-cell">{{item.description}}</mat-cell>
         </ng-container>
 
-    <mat-header-row *matHeaderRowDef ="inventoryColumns"></mat-header-row>
-    <mat-row *matRowDef = "let myrow; columns: inventoryColumns;"></mat-row>
-  </mat-table>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let item">
+            <button mat-icon-button color="warn" (click)="deleteItem(item.id)" aria-label="Delete item">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="inventoryColumns"></mat-header-row>
+        <mat-row *matRowDef="let myrow; columns: inventoryColumns;"></mat-row>
+      </mat-table>
+    </mat-card-content>
+  </mat-card>
 
 </div>
+

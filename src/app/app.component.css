@@ -1,23 +1,85 @@
-.app-container {
+.app-shell {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #f3f3f7;
+}
+
+.top-app-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08) !important;
+  min-height: 64px;
+}
+
+.app-bar-leading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-logo-icon {
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+  opacity: 0.95;
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .spacer {
   flex: 1 1 auto;
 }
 
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.app-nav a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 100px;
+  padding: 0 16px;
+  height: 40px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  opacity: 0.9;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.app-nav a:hover {
+  background-color: rgba(255,255,255,0.15);
+  opacity: 1;
+}
+
+.app-nav a.nav-active {
+  background-color: rgba(255,255,255,0.2);
+  opacity: 1;
+  font-weight: 600;
+}
+
+.app-nav mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
 .main-content {
   flex: 1;
-  padding: 20px;
   overflow-y: auto;
 }
 
-nav a {
-  margin-left: 10px;
-}
-
-nav a.active {
-  background-color: rgba(255, 255, 255, 0.2);
+@media (max-width: 600px) {
+  .app-title { font-size: 1rem; }
+  .app-nav a { padding: 0 12px; }
 }

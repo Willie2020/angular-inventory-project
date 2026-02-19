@@ -19,10 +19,19 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico"
+              "src/favicon.ico",
+              {
+                "glob": "material-symbols-outlined.woff2",
+                "input": "./node_modules/material-symbols/",
+                "output": "./assets/fonts/"
+              }
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/@fontsource/roboto/700.css",
+              "./node_modules/@fontsource/roboto/500.css",
+              "./node_modules/@fontsource/roboto/400.css",
+              "./node_modules/@fontsource/roboto/300.css",
+              "./node_modules/@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -64,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "angular-inventory-project:build:production"
+              "buildTarget": "angular-inventory-project:build:production"
             },
             "development": {
-              "browserTarget": "angular-inventory-project:build:development"
+              "buildTarget": "angular-inventory-project:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-inventory-project:build"
+            "buildTarget": "angular-inventory-project:build"
           }
         },
         "test": {
@@ -89,7 +98,7 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -109,6 +118,5 @@
         }
       }
     }
-  },
-  "defaultProject": "angular-inventory-project"
+  }
 }

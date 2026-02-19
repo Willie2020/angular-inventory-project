@@ -2,19 +2,37 @@ import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { SalesInventService } from '../../services/sales-invent.service';
 import { Sales } from '../../models/sales';
 import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-sales-inventory',
   templateUrl: './sales-inventory.component.html',
-  styleUrls: ['./sales-inventory.component.css']
+  styleUrls: ['./sales-inventory.component.css'],
+  imports: [
+    CommonModule, FormsModule,
+    MatTableModule, MatFormFieldModule, MatInputModule,
+    MatButtonModule, MatPaginatorModule, MatIconModule,
+    MatCardModule, MatDividerModule, MatSelectModule
+  ]
 })
 export class SalesInventoryComponent implements OnInit, AfterViewInit {
   SalesColumns = ['Date', 'ReferenceNo', 'Customer', 'Payment', 'Balance', 'SalesStatus', 'Actions'];
   sale: Sales[] = [];
   total = 0;
+  completedCount = 0;
+
+  salesStatusOptions = ['Completed', 'Pending', 'Processing', 'Returned', 'Cancelled'];
 
   sales$: Observable<Sales[]>;
   dataSource = new SalesSource(this.saleServe);
@@ -32,7 +50,7 @@ export class SalesInventoryComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private saleServe: SalesInventService) { 
+  constructor(private saleServe: SalesInventService) {
     this.sales$ = this.saleServe.getSalesData();
   }
 
@@ -57,16 +75,27 @@ export class SalesInventoryComponent implements OnInit, AfterViewInit {
 
   calculateTotal() {
     this.total = this.sale.reduce((sum, sale) => sum + (sale.Payment || 0), 0);
+    this.completedCount = this.sale.filter(s => this.normalizeStatus(s.SalesStatus) === 'completed').length;
+  }
+
+  normalizeStatus(status: string): string {
+    return status?.toLowerCase() ?? '';
+  }
+
+  getStatusClass(status: string): string {
+    const s = this.normalizeStatus(status);
+    if (!s) return 'default';
+    if (s === 'completed') return 'completed';
+    if (s === 'pending' || s === 'processing') return 'pending';
+    if (s === 'returned' || s === 'cancelled') return 'returned';
+    return 'default';
   }
 
   addSales() {
     if (this.inSale.Customer && this.inSale.Payment) {
-      // Generate reference number if not provided
       if (!this.inSale.ReferenceNo) {
         this.inSale.ReferenceNo = 'REF' + Date.now().toString().slice(-6);
       }
-      
-      // Set current date if not provided
       if (!this.inSale.Date) {
         this.inSale.Date = new Date().toISOString().split('T')[0];
       }
@@ -104,5 +133,3 @@ export class SalesSource extends DataSource<Sales> {
     // Cleanup logic if needed
   }
 }
-
-

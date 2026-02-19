@@ -1,14 +1,26 @@
-<div class="app-container">
-  <mat-toolbar color="primary">
-    <span>{{title}}</span>
+<div class="app-shell">
+  <mat-toolbar class="top-app-bar" color="primary">
+    <div class="app-bar-leading">
+      <mat-icon class="app-logo-icon">inventory_2</mat-icon>
+      <span class="app-title">{{title}}</span>
+    </div>
     <span class="spacer"></span>
-    <nav>
-      <a mat-button routerLink="/products" routerLinkActive="active">Products</a>
-      <a mat-button routerLink="/inventory" routerLinkActive="active">Inventory</a>
-      <a mat-button routerLink="/sales" routerLinkActive="active">Sales</a>
+    <nav class="app-nav">
+      <a mat-button routerLink="/products" routerLinkActive="nav-active">
+        <mat-icon>category</mat-icon>
+        Products
+      </a>
+      <a mat-button routerLink="/inventory" routerLinkActive="nav-active">
+        <mat-icon>inventory</mat-icon>
+        Inventory
+      </a>
+      <a mat-button routerLink="/sales" routerLinkActive="nav-active">
+        <mat-icon>point_of_sale</mat-icon>
+        Sales
+      </a>
     </nav>
   </mat-toolbar>
-  
+
   <main class="main-content">
     <router-outlet></router-outlet>
   </main>

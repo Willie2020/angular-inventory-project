@@ -9,11 +9,12 @@ import { ItemService } from './services/item.service';
 import { TableinventoryComponent } from './components/tableinventory/tableinventory.component';
 import { SalesInventService } from './services/sales-invent.service';
 import { SalesInventoryComponent } from './components/sales-inventory/sales-inventory.component';
-import { MyrouteModule} from './myroute/myroute.module';
 import { ProductsService } from './services/products.service';
 import { ProductinventComponent } from './components/productinvent/productinvent.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -26,11 +27,10 @@ imports: [
   FormsModule,
   ReactiveFormsModule,
   HttpClientModule,
-  MyrouteModule
+  RouterModule.forRoot(routes)
 ],
 providers: [ItemService, SalesInventService, ProductsService],
 bootstrap: [AppComponent]
 })
 
 export class AppModule { }
-

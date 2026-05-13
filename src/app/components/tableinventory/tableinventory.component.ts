@@ -1,45 +1,47 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../services/item.service';
 import { Item } from '../../models/Items';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
+import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-tableinventory',
   templateUrl: './tableinventory.component.html',
   styleUrls: ['./tableinventory.component.css'],
-  imports: [CommonModule, FormsModule, MatTableModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatIconModule, MatDividerModule]
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule
+  ]
 })
-export class TableinventoryComponent implements OnInit, AfterViewInit {
-  inventoryColumns = ['id', 'title', 'description', 'actions'];
+export class TableinventoryComponent implements OnInit {
+  inventoryColumns = ['id', 'title', 'description'];
   item: Item[] = [];
   items$: Observable<Item[]>;
   dataSource = new InventorySource(this.itemService);
 
-  newItem: Item = {
-    title: '',
-    description: ''
-  };
+  itemForm: FormGroup;
 
-  constructor(private itemService: ItemService) {
+  constructor(private itemService: ItemService, private fb: FormBuilder) {
     this.items$ = this.itemService.getItems();
+    this.itemForm = this.fb.group({
+      title: [''],
+      description: ['']
+    });
   }
 
   ngOnInit() {
     this.loadItems();
-  }
-
-  ngAfterViewInit() {
-    console.log('Table inventory component initialized');
   }
 
   loadItems() {
@@ -50,8 +52,9 @@ export class TableinventoryComponent implements OnInit, AfterViewInit {
   }
 
   addItem() {
-    if (this.newItem.title && this.newItem.description) {
-      this.itemService.addItem(this.newItem).subscribe(() => {
+    const formValue = this.itemForm.value;
+    if (formValue.title && formValue.description) {
+      this.itemService.addItem(formValue).subscribe(() => {
         this.loadItems();
         this.resetForm();
       });
@@ -59,10 +62,10 @@ export class TableinventoryComponent implements OnInit, AfterViewInit {
   }
 
   resetForm() {
-    this.newItem = {
+    this.itemForm.reset({
       title: '',
       description: ''
-    };
+    });
   }
 
   deleteItem(id: string) {
@@ -85,5 +88,3 @@ export class InventorySource extends DataSource<Item> {
     // Cleanup logic if needed
   }
 }
-
-

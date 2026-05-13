@@ -5,9 +5,13 @@ import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -17,19 +21,24 @@ import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule
+    MatIconModule,
+    MatCardModule,
+    MatDividerModule
   ]
 })
 export class TableinventoryComponent implements OnInit {
-  inventoryColumns = ['id', 'title', 'description'];
+  inventoryColumns = ['id', 'title', 'description', 'actions'];
   item: Item[] = [];
   items$: Observable<Item[]>;
   dataSource = new InventorySource(this.itemService);
 
+  newItem = { title: '', description: '' };
   itemForm: FormGroup;
 
   constructor(private itemService: ItemService, private fb: FormBuilder) {
@@ -52,9 +61,8 @@ export class TableinventoryComponent implements OnInit {
   }
 
   addItem() {
-    const formValue = this.itemForm.value;
-    if (formValue.title && formValue.description) {
-      this.itemService.addItem(formValue).subscribe(() => {
+    if (this.newItem.title && this.newItem.description) {
+      this.itemService.addItem(this.newItem).subscribe(() => {
         this.loadItems();
         this.resetForm();
       });
@@ -62,10 +70,7 @@ export class TableinventoryComponent implements OnInit {
   }
 
   resetForm() {
-    this.itemForm.reset({
-      title: '',
-      description: ''
-    });
+    this.newItem = { title: '', description: '' };
   }
 
   deleteItem(id: string) {

@@ -12,14 +12,14 @@
   z-index: 100;
   padding: 0 16px;
   min-height: 64px;
-  /* M3 azure → violet brand gradient */
-  background: linear-gradient(135deg, #0057d9 0%, #3d6bf0 45%, #7a3ff2 130%) !important;
+  /* M3 primary gradient — same azure family as buttons/focus for a cohesive look */
+  background: linear-gradient(135deg, var(--mat-sys-primary) 0%, color-mix(in srgb, var(--mat-sys-primary) 72%, #000) 100%) !important;
   color: #ffffff !important;
   box-shadow:
     0 2px 8px rgba(0, 0, 0, 0.16),
     0 4px 16px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-  border-bottom: 3px solid rgba(255, 255, 255, 0.15);
+    inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.14);
 }
 
 /* ── Leading brand area ──────────────────────────────── */
@@ -67,7 +67,8 @@
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  opacity: 0.82;
+  color: #ffffff !important;
+  opacity: 0.85;
   transition:
     background-color 0.2s ease,
     opacity 0.2s ease,
@@ -77,6 +78,7 @@
 
 .app-nav a:hover {
   background-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff !important;
   opacity: 1;
   transform: translateY(-1px);
   box-shadow: 0 2px 6px rgba(0,0,0,0.12);
@@ -84,6 +86,7 @@
 
 .app-nav a.nav-active {
   background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff !important;
   opacity: 1;
   font-weight: 600;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);

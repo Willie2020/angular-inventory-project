@@ -4,6 +4,9 @@
 
 @use '@angular/material' as mat;
 
+@include mat.core();
+
+// Applies the M3 color/typography/density tokens to Material components.
 $inventory-theme: mat.define-theme((
   color: (
     theme-type: light,
@@ -14,10 +17,20 @@ $inventory-theme: mat.define-theme((
     plain-family: 'Roboto',
     brand-family: 'Roboto',
   ),
-  density: (
-    scale: 0,
-  ),
+  density: (scale: 0),
 ));
 
-@include mat.core();
 @include mat.all-component-themes($inventory-theme);
+
+// Emits the system-level tokens (--mat-sys-*) referenced by custom styles.
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$violet-palette,
+    ),
+    typography: 'Roboto',
+    density: 0,
+  ));
+}

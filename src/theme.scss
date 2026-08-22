@@ -1,0 +1,23 @@
+// Material Design 3 theme — generated with the official Angular Material theming API.
+// This replaces the static prebuilt theme so all components share one M3 token system
+// (--mat-sys-* CSS variables) with a custom brand palette.
+
+@use '@angular/material' as mat;
+
+$inventory-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$violet-palette,
+  ),
+  typography: (
+    plain-family: 'Roboto',
+    brand-family: 'Roboto',
+  ),
+  density: (
+    scale: 0,
+  ),
+));
+
+@include mat.core();
+@include mat.all-component-themes($inventory-theme);

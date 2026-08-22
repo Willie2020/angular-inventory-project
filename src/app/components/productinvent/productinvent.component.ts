@@ -12,6 +12,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
+import { NbCardModule, NbBadgeModule, NbTagModule } from '@nebular/theme';
 
 @Component({
   selector: 'app-productinvent',
@@ -27,7 +28,10 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatTableModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    NbCardModule,
+    NbBadgeModule,
+    NbTagModule
   ]
 })
 export class ProductinventComponent implements AfterViewInit, OnInit {
@@ -83,6 +87,16 @@ export class ProductinventComponent implements AfterViewInit, OnInit {
         this.resetForm();
       });
     }
+  }
+
+  stockStatus(qty: number): { label: string; status: 'success' | 'warning' | 'danger' } {
+    if (qty <= 0) {
+      return { label: 'Out of stock', status: 'danger' };
+    }
+    if (qty < 10) {
+      return { label: 'Low stock', status: 'warning' };
+    }
+    return { label: 'In stock', status: 'success' };
   }
 
   resetForm() {

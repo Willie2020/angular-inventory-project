@@ -9,29 +9,32 @@
 
   <!-- Summary Stats -->
   <div class="stats-row">
-    <mat-card class="stat-card" appearance="outlined">
-      <mat-card-content>
+    <nb-card class="stat-card" accent="primary">
+      <nb-card-body>
+        <nb-badge text="Catalog" position="top right" status="primary"></nb-badge>
         <mat-icon class="stat-icon">inventory_2</mat-icon>
         <div class="stat-value">{{totalProducts}}</div>
         <div class="stat-label">Products</div>
-      </mat-card-content>
-    </mat-card>
+      </nb-card-body>
+    </nb-card>
 
-    <mat-card class="stat-card" appearance="outlined">
-      <mat-card-content>
+    <nb-card class="stat-card" accent="success">
+      <nb-card-body>
+        <nb-badge text="On hand" position="top right" status="success"></nb-badge>
         <mat-icon class="stat-icon">storefront</mat-icon>
         <div class="stat-value">{{totalAvailable}}</div>
         <div class="stat-label">Total in Stock</div>
-      </mat-card-content>
-    </mat-card>
+      </nb-card-body>
+    </nb-card>
 
-    <mat-card class="stat-card" appearance="outlined">
-      <mat-card-content>
+    <nb-card class="stat-card" accent="info">
+      <nb-card-body>
+        <nb-badge text="Value" position="top right" status="info"></nb-badge>
         <mat-icon class="stat-icon">payments</mat-icon>
         <div class="stat-value">${{totalValue | number:'1.0-0'}}</div>
         <div class="stat-label">Inventory Value</div>
-      </mat-card-content>
-    </mat-card>
+      </nb-card-body>
+    </nb-card>
   </div>
 
   <!-- Add Product Form -->
@@ -113,7 +116,7 @@
         <ng-container matColumnDef="QuantityAv">
           <mat-header-cell *matHeaderCellDef>Available</mat-header-cell>
           <mat-cell *matCellDef="let product">
-            <span class="qty-badge available">{{product.QuantityAv}}</span>
+            <nb-tag [text]="stockStatus(product.QuantityAv).label" [status]="stockStatus(product.QuantityAv).status" size="tiny"></nb-tag>
           </mat-cell>
         </ng-container>
 

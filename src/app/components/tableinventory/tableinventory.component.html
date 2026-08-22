@@ -6,6 +6,27 @@
     <h2>Inventory Items</h2>
   </div>
 
+  <!-- Summary Stats -->
+  <div class="stats-row">
+    <nb-card class="stat-card" accent="primary">
+      <nb-card-body>
+        <nb-badge text="Tracked" position="top right" status="primary"></nb-badge>
+        <mat-icon class="stat-icon">inventory_2</mat-icon>
+        <div class="stat-value">{{item.length}}</div>
+        <div class="stat-label">Total Items</div>
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card class="stat-card" accent="success">
+      <nb-card-body>
+        <nb-badge text="Coverage" position="top right" status="success"></nb-badge>
+        <mat-icon class="stat-icon">notes</mat-icon>
+        <div class="stat-value">{{describedCoverage}}%</div>
+        <div class="stat-label">With Description</div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+
   <!-- Add Item Form -->
   <mat-card class="form-section-card" appearance="outlined">
     <mat-card-header>

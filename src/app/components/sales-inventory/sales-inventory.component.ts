@@ -1,7 +1,6 @@
 import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { SalesInventService } from '../../services/sales-invent.service';
 import { Sales } from '../../models/sales';
-import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
@@ -10,8 +9,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { NbCardModule, NbBadgeModule, NbTagModule } from '@nebular/theme';
 
 @Component({
   selector: 'app-sales-inventory',
@@ -25,16 +28,21 @@ import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    ReactiveFormsModule
+    MatCardModule,
+    MatIconModule,
+    MatDividerModule,
+    ReactiveFormsModule,
+    NbCardModule,
+    NbBadgeModule,
+    NbTagModule
   ]
 })
 export class SalesInventoryComponent implements OnInit, AfterViewInit {
-  SalesColumns = ['Date', 'ReferenceNo', 'Customer', 'Payment', 'Balance', 'SalesStatus', 'Actions'];
+  SalesColumns = ['Date', 'Reference No', 'Customer', 'Sales Status', 'Payment', 'Balance', 'Actions'];
   sale: Sales[] = [];
   total = 0;
 
   sales$: Observable<Sales[]>;
-  dataSource = new SalesSource(this.saleServe);
   dataS2 = new MatTableDataSource<Sales>(this.sale);
 
   inSaleForm: FormGroup;
@@ -77,6 +85,24 @@ export class SalesInventoryComponent implements OnInit, AfterViewInit {
     this.total = this.sale.reduce((sum, sale) => sum + (sale.Payment || 0), 0);
   }
 
+  get totalBalance(): number {
+    return this.sale.reduce((sum, sale) => sum + (sale.Balance || 0), 0);
+  }
+
+  statusOf(s: string): 'success' | 'warning' | 'info' | 'danger' {
+    const v = (s || '').toLowerCase();
+    if (v.includes('complete') || v.includes('paid') || v.includes('done')) {
+      return 'success';
+    }
+    if (v.includes('pending') || v.includes('await')) {
+      return 'warning';
+    }
+    if (v.includes('cancel') || v.includes('return') || v.includes('refund')) {
+      return 'danger';
+    }
+    return 'info';
+  }
+
   addSales() {
     const formValue = this.inSaleForm.value;
     if (formValue.Customer && formValue.Payment) {
@@ -107,19 +133,5 @@ export class SalesInventoryComponent implements OnInit, AfterViewInit {
       Balance: 0,
       Actions: ''
     });
-  }
-}
-
-export class SalesSource extends DataSource<Sales> {
-  constructor(private saleServe: SalesInventService) {
-    super();
-  }
-
-  connect(): Observable<Sales[]> {
-    return this.saleServe.getSalesData();
-  }
-
-  disconnect() {
-    // Cleanup logic if needed
   }
 }
